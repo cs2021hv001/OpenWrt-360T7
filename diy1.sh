@@ -14,7 +14,7 @@
 #sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 
 # Add feed sources
-sed -i '$a src-git-full small https://github.com/kenzok8/small-package' feeds.conf.default
+sed -i '$a src-git-full small https://github.com/kenzok8/jell.git' feeds.conf.default
 sed -i '$a src-git-full kenzok https://github.com/kenzok8/openwrt-packages' feeds.conf.default
 #sed -i '$a src-git-full xiaorouji_passwall https://github.com/xiaorouji/openwrt-passwall.git' feeds.conf.default
 #sed -i '$a src-git-full sbwml_mosdns https://github.com/sbwml/luci-app-mosdns.git' feeds.conf.default
