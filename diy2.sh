@@ -25,3 +25,11 @@ sed -i 's/192.168.1.1/192.168.88.7/g' package/base-files/files/bin/config_genera
 sed -i 's/192.168.1.1/192.168.88.7/g' ppackage/base-files/luci2/bin/config_generate
 #sed -i "s/hostname='ImmortalWrt'/hostname='OpenWRT-360T7'/g" package/base-files/files/bin/config_generate
 sed -i "s/DISTRIB_DESCRIPTION=.*/DISTRIB_DESCRIPTION='OpenWrt By 神棍 $(date +"%Y%m%d")'/g" package/base-files/files/etc/openwrt_release
+
+# 修改内存为 512M
+sed -i 's/0x10000000/0x20000000/' target/linux/mediatek/dts/mt7981b-360-t7.dts
+
+# 打印修改后的内容，日志里能直接看到
+echo "===== 检查 DTS 内存配置 ====="
+grep -E "0x[0-9a-fA-F]+$" target/linux/mediatek/dts/mt7981b-360-t7.dts
+echo "============================"
