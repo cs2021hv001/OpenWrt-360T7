@@ -33,13 +33,4 @@ sed -i "s/DISTRIB_DESCRIPTION=.*/DISTRIB_DESCRIPTION='OpenWrt By 神棍 $(date +
 #echo "===== 检查 DTS 内存配置 ====="
 #grep -E "0x[0-9a-fA-F]+$" target/linux/mediatek/dts/mt7981b-360-t7.dts
 #echo "============================"
-# 360T7 改 512MB 内存（适配你当前这个极简DTS）
-DTS_FILE="target/linux/mediatek/files-5.4/arch/arm64/boot/dts/mediatek/mt7981-360-t7.dts"
-
-# 256MB → 512MB
-sed -i 's|reg = <0 0x40000000 0 0x10000000>;|reg = <0 0x40000000 0 0x20000000>;|g' $DTS_FILE
-
-# 输出确认修改成功
-echo "===== 360T7 内存修改结果 ====="
-grep "memory" $DTS_FILE -A 1
 
