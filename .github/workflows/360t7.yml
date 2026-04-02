@@ -129,18 +129,18 @@ jobs:
         cd openwrt
 
         # 精准修改 360T7 DTS 内存为 512M
-        DTS="target/linux/mediatek/files-5.4/arch/arm64/boot/dts/mediatek/mt7981-360-t7.dts"
+        #DTS="target/linux/mediatek/files-5.4/arch/arm64/boot/dts/mediatek/mt7981-360-t7.dts"
 
         # 只改数字，不管空格格式，永不报错
-        sed -i 's/0x10000000/0x20000000/' "$DTS"
+        #sed -i 's/0x10000000/0x20000000/' "$DTS"
 
         # 输出查看，防止编译中断
-        echo "==== DTS memory 修改结果 ===="
-        grep -A 1 -B 1 "reg.*0x" "$DTS" || true
+        #echo "==== DTS memory 修改结果 ===="
+        #grep -A 1 -B 1 "reg.*0x" "$DTS" || true
 
 
 
-        echo "============================"
+        #echo "============================"
         echo -e "$(nproc) thread compile"
         make -j$(nproc) || make -j1 || make -j1 V=s || (curl -k -d "title=OpenWrt-360T7固件编译失败" -d "content=编译固件版本：${{ env.FIRMWARE_VERSION }}%0A编译开始时间：${{ env.START_DATE }}%0A编译结束时间：$(date +'%Y年%m月%d日 %H点%M分%S秒')" -d "token=${{ env.PUSHPLUS_TOKEN }}&channel=cp&webhook=server" "http://www.pushplus.plus/send")
         echo "status=success" >> $GITHUB_OUTPUT
