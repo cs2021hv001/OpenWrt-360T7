@@ -125,15 +125,16 @@ jobs:
       id: compile
       run: |
         cd openwrt
-        # 360T7 改 512MB 内存（适配你当前这个极简DTS）
-        DTS_FILE="target/linux/mediatek/files-5.4/arch/arm64/boot/dts/mediatek/mt7981-360-t7.dts"
+        # 360 T7 512MB 内存修改（适配你的极简DTS，不报错）
+        DTS_PATH="target/linux/mediatek/files-5.4/arch/arm64/boot/dts/mediatek/mt7981-360-t7.dts"
 
-        # 256MB → 512MB
-        sed -i 's|reg = <0 0x40000000 0 0x10000000>;|reg = <0 0x40000000 0 0x20000000>;|g' $DTS_FILE
+        # 替换内存大小 256M -> 512M
+        sed -i 's/0x10000000>/0x20000000>/g' $DTS_PATH
 
-        # 输出确认修改成功
-        echo "===== 360T7 内存修改结果 ====="
-        grep "memory" $DTS_FILE -A 1
+        # 输出检查
+        echo "===== 修改完成，检查结果 ====="
+        grep -A 1 "memory" $DTS_PATH
+
 
         echo "============================"
         echo -e "$(nproc) thread compile"
